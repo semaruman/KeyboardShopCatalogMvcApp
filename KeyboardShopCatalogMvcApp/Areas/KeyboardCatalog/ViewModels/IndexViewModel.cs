@@ -2,15 +2,15 @@
 {
     public class IndexViewModel
     {
-        List<KeyboardViewModel> Keyboards { get; set; }
-        List<string> Brands { get; set; } = new List<string>() { 
+        public List<KeyboardViewModel> Keyboards { get; set; } = new List<KeyboardViewModel>();
+        public List<string> Brands { get; set; } = new List<string>() { 
             "Все",
             "A4Tech", "ARDOR GAMING", "Logitech", "RedSquare",
             "Дарк Проджект", "Apple", "Defender"
         };
-        List<string> Types { get; set; } = new List<string>()
-         {
+        public List<string> Types { get; set; } = new List<string>()
+        {
              "Мембранная", "Механическая", "Ножничная"
-         };
+        };
     }
 }

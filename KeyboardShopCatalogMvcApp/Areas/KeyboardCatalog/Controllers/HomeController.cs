@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.ViewModels;
 
 namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Controllers
 {
@@ -6,9 +7,16 @@ namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Controllers
     [Route("{area}/[controller]/[action]")]
     public class HomeController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return View(new IndexViewModel());
+        }
+
+        [HttpPost]
+        public IActionResult Index(IndexViewModel model)
+        {
+            return View(model);
         }
     }
 }

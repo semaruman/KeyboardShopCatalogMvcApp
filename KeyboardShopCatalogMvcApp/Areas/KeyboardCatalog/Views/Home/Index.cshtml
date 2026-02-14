@@ -1,3 +1,7 @@
 ﻿@model IndexViewModel
+@{
+	ViewBag.Title = "Каталог клавиатур";
+	int itemsCount = @Model.Keyboards.Count();
+}
 
-<h1>Главная</h1>
+<h1>Найдено @itemsCount товаров в категории Клавиатура</h1>
