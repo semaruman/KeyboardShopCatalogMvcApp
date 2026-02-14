@@ -12,7 +12,7 @@ namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.ViewModels
         };
         public List<string> Types { get; set; } = new List<string>()
         {
-             "Мембранная", "Механическая", "Ножничная"
+             "Все", "Мембранная", "Механическая", "Ножничная"
         };
 
         public IndexViewModel()
