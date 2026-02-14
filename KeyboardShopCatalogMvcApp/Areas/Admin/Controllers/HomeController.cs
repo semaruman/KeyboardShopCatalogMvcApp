@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using KeyboardShopCatalogMvcApp.Areas.Admin.Models;
 using KeyboardShopCatalogMvcApp.Areas.Admin.ViewModels;
+using KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Models;
 
 namespace KeyboardShopCatalogMvcApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class HomeController : Controller
     {
-        AdminModel adminModel = new AdminModel();
+        static AdminModel adminModel = new AdminModel();
 
         [Route("{area}")]
         [Route("{area}/{controller}/{action}")]
@@ -57,6 +58,39 @@ namespace KeyboardShopCatalogMvcApp.Areas.Admin.Controllers
         {
             adminModel = new AdminModel();
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult AddKeyboard()
+        {
+            if (adminModel.IsAvtorizate)
+            {
+                return View(new KeyboardModel());
+            }
+            else
+            {
+                return RedirectToAction("ErrorAuthorization");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult AddKeyboard(KeyboardModel keyboard)
+        {
+            if (ModelState.IsValid)
+            {
+                KeyboardDb db = new KeyboardDb();
+                db.AddKeyboardModel(keyboard);
+                return RedirectToAction("AddKeyboardSuccess");
+            }
+            else
+            {
+                return View(keyboard);
+            }
+        }
+
+        public IActionResult AddKeyboardSuccess()
+        {
+            return View();
         }
     }
 }

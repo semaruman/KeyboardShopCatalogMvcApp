@@ -1,0 +1,36 @@
+﻿@using KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Models
+@model KeyboardModel
+
+<h1>Добавление клавиатуры</h1>
+
+<form asp-area="Admin" asp-controller="Home" asp-action="AddKeyboard">
+	<h2>Введите бренд клавиатуры</h2>
+	<input asp-for="Brand"/>
+	<span asp-validation-for="Brand"></span>
+
+	<h2>Введите название клавиатуры</h2>
+	<input asp-for="Name" />
+	<span asp-validation-for="Name"></span>
+
+	<h2>Введите цену клавиатуры</h2>
+	<input type="number" asp-for="Price" />
+	<span asp-validation-for="Price"></span>
+
+	<h2>Выберите тип клавиатуры</h2>
+	<input asp-for="KeyboardType" />
+	<span asp-validation-for="KeyboardType"></span>
+
+	<h2>Введите ширину клавиатуры</h2>
+	<input type="number" asp-for="Width" />
+	<span asp-validation-for="Width"></span>
+
+	<h2>Введите высоту клавиатуры</h2>
+	<input type="number" asp-for="Height" />
+	<span asp-validation-for="Height"></span>
+
+	<h2>Введите количество клавиш клавиатуры</h2>
+	<input type="number" asp-for="KeysCount" />
+	<span asp-validation-for="KeysCount"></span>
+
+	<button type="submit" value="Отправить"></button>
+</form>

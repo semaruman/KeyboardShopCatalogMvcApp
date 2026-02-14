@@ -5,7 +5,7 @@ namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Models
 {
     public class KeyboardDb
     {
-        private readonly string filepath = Path.Combine(Directory.GetCurrentDirectory(), "Areas", "Library", "Data", "keyboard_db.json");
+        private readonly string filepath = Path.Combine(Directory.GetCurrentDirectory(), "Areas", "KeyboardCatalog", "Data", "keyboard_db.json");
 
         public void AddKeyboardModel(KeyboardModel keyboard)
         {

@@ -1,8 +1,10 @@
-﻿namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.ViewModels
+﻿using KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Models;
+
+namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.ViewModels
 {
     public class IndexViewModel
     {
-        public List<KeyboardViewModel> Keyboards { get; set; } = new List<KeyboardViewModel>();
+        public List<KeyboardViewModel> Keyboards { get; set; }
         public List<string> Brands { get; set; } = new List<string>() { 
             "Все",
             "A4Tech", "ARDOR GAMING", "Logitech", "RedSquare",
@@ -12,5 +14,11 @@
         {
              "Мембранная", "Механическая", "Ножничная"
         };
+
+        public IndexViewModel()
+        {
+            KeyboardDb db = new KeyboardDb();
+            Keyboards = db.GetKeyboardViewModels();
+        }
     }
 }
