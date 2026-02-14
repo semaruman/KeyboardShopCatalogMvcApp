@@ -10,9 +10,12 @@
         {
             if (password != passwordParam)
             {
-                throw new Exception("Неверный пароль!");
+                isAvtorizate = false;
             }
-            isAvtorizate = true;
+            else
+            {
+                isAvtorizate = true;
+            }
         }
     }
 }

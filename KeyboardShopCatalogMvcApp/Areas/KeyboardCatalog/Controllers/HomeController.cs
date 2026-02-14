@@ -4,7 +4,6 @@ using KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.ViewModels;
 namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Controllers
 {
     [Area("KeyboardCatalog")]
-    [Route("{area}/[controller]/[action]")]
     public class HomeController : Controller
     {
         [HttpGet]

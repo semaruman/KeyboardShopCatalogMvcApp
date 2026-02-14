@@ -1,31 +1,42 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using KeyboardShopCatalogMvcApp.Areas.Admin.Models;
+using KeyboardShopCatalogMvcApp.Areas.Admin.ViewModels;
 
 namespace KeyboardShopCatalogMvcApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("{area}/[controller]/[action]")]
     public class HomeController : Controller
     {
         AdminModel adminModel = new AdminModel();
+
+        [Route("{area}")]
+        [Route("{area}/{controller}/{action}")]
         public IActionResult Index()
         {
-            return View();
+            return View(adminModel);
         }
 
         [HttpGet]
         public IActionResult Authorization()
         {
-            return View(new AdminModel());
+            return View(new AdminViewModel());
         }
 
         [HttpPost]
-        public IActionResult Authorization(AdminModel admin)
+        public IActionResult Authorization(AdminViewModel admin)
         {
             if (ModelState.IsValid)
             {
-                adminModel = admin;
-                return RedirectToAction("SuccessAuthorization");
+                adminModel.Authorization(admin.Password);
+
+                if (adminModel.IsAvtorizate)
+                {
+                    return RedirectToAction("SuccessAuthorization");
+                }
+                else
+                {
+                    return RedirectToAction("ErrorAuthorization");
+                }
             }
             else
             {
@@ -36,6 +47,16 @@ namespace KeyboardShopCatalogMvcApp.Areas.Admin.Controllers
         public IActionResult SuccessAuthorization()
         {
             return View();
+        }
+        public IActionResult ErrorAuthorization()
+        {
+            return View();
+        }
+
+        public IActionResult LeaveAuthorization()
+        {
+            adminModel = new AdminModel();
+            return RedirectToAction("Index");
         }
     }
 }
