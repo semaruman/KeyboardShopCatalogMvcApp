@@ -18,6 +18,8 @@ namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.ViewModels
         public string SelectedBrand { get; set; } = "Все";
         public string SelectedType { get; set; } = "Все";
 
+        public string SortType { get; set; } = "None";
+
         public IndexViewModel()
         {
             KeyboardDb db = new KeyboardDb();

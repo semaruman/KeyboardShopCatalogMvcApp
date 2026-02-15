@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.ViewModels;
 using KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Models;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Controllers
 {
@@ -16,9 +17,10 @@ namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Controllers
         [HttpPost]
         public IActionResult Index(IndexViewModel model)
         {
+            //фильтрация
             if (model.SelectedBrand == "Все" && model.SelectedType == "Все")
             {
-                return View(new IndexViewModel());
+                // ничего не делает, чтобы дойти до сортировки
             }
             else if (model.SelectedBrand != "Все" && model.SelectedType == "Все")
             {
@@ -26,7 +28,6 @@ namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Controllers
                 model.Keyboards = db.GetKeyboardViewModels()
                     .Where(k => k.Brand == model.SelectedBrand)
                     .ToList();
-                return View(model);
             }
             else if (model.SelectedBrand == "Все" && model.SelectedType != "Все")
             {
@@ -34,7 +35,6 @@ namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Controllers
                 model.Keyboards = db.GetKeyboardViewModels()
                     .Where(k => k.KeyboardType == model.SelectedType)
                     .ToList();
-                return View(model);
             }
             else
             {
@@ -42,9 +42,21 @@ namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Controllers
                 model.Keyboards = db.GetKeyboardViewModels()
                     .Where(k => k.KeyboardType == model.SelectedType && k.Brand == model.SelectedBrand)
                     .ToList();
-                return View(model);
             }
-            //return View(model);
+            Console.WriteLine(model.SortType);
+            if (model.SortType == "None")
+            {
+                // никак не сортирую
+            }
+            else if (model.SortType == "PriceAsc")
+            {
+                model.Keyboards =  model.Keyboards.OrderBy(k => k.Price).ToList();
+            }
+            else if (model.SortType == "PriceDesc")
+            {
+                model.Keyboards = model.Keyboards.OrderByDescending(k => k.Price).ToList();
+            }
+            return View(model);
         }
     }
 }

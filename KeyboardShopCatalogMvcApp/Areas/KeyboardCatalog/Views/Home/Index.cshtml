@@ -16,12 +16,23 @@
 				<option>@brand</option>
 			}
 		</select>
+		<h3>Тип:</h3>
 		<select asp-for="SelectedType">
 			@foreach (var type in Model.Types)
 			{
 				<option>@type</option>
 			}
 		</select>
+
+		<h2>Сортировка:</h2>
+		<select asp-for="SortType">
+			<option value="None">Без сортировки</option>
+			<option value="PriceAsc">По возрастанию цены</option>
+			<option value="PriceDesc">По убыванию цены</option>
+		</select>
+
+		<br />
+		<br />
 		<button type="submit">Применить</button>
 	</form>
 </div>
