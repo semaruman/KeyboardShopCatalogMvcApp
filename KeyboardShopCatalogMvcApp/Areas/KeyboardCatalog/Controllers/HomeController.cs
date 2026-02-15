@@ -17,33 +17,27 @@ namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Controllers
         [HttpPost]
         public IActionResult Index(IndexViewModel model)
         {
-            //фильтрация
-            if (model.SelectedBrand == "Все" && model.SelectedType == "Все")
+            KeyboardDb db = new KeyboardDb();
+            model.Keyboards = db.GetKeyboardViewModels();
+
+            // фильтрация
+
+            if (model.SelectedBrand != "Все")
             {
-                // ничего не делает, чтобы дойти до сортировки
-            }
-            else if (model.SelectedBrand != "Все" && model.SelectedType == "Все")
-            {
-                KeyboardDb db = new KeyboardDb();
-                model.Keyboards = db.GetKeyboardViewModels()
+                
+                model.Keyboards = model.Keyboards
                     .Where(k => k.Brand == model.SelectedBrand)
                     .ToList();
             }
-            else if (model.SelectedBrand == "Все" && model.SelectedType != "Все")
+
+            if (model.SelectedType != "Все")
             {
-                KeyboardDb db = new KeyboardDb();
-                model.Keyboards = db.GetKeyboardViewModels()
+                model.Keyboards = model.Keyboards
                     .Where(k => k.KeyboardType == model.SelectedType)
                     .ToList();
             }
-            else
-            {
-                KeyboardDb db = new KeyboardDb();
-                model.Keyboards = db.GetKeyboardViewModels()
-                    .Where(k => k.KeyboardType == model.SelectedType && k.Brand == model.SelectedBrand)
-                    .ToList();
-            }
-            Console.WriteLine(model.SortType);
+
+            // сортировка
             if (model.SortType == "None")
             {
                 // никак не сортирую
