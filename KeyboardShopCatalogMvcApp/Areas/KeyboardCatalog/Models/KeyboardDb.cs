@@ -37,10 +37,36 @@ namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Models
                     list = JsonSerializer.Deserialize<List<KeyboardModel>>(json) ?? new List<KeyboardModel>();
                 }
             }
-            list = list.Where(k => k.Brand != brand &&  k.Name != name && k.KeyboardType != type).ToList();
+            list = list.Where(k => !(k.Brand == brand &&  k.Name == name && k.KeyboardType == type)).ToList();
 
             string jsonWrite = JsonSerializer.Serialize(list);
             File.WriteAllText(filepath, jsonWrite);
+        }
+
+        public bool ChangeKeyboardModel(string brand, string name, string type, double price)
+        {
+            List<KeyboardModel> list = new List<KeyboardModel>();
+
+            if (File.Exists(filepath))
+            {
+                string json = File.ReadAllText(filepath);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    list = JsonSerializer.Deserialize<List<KeyboardModel>>(json) ?? new List<KeyboardModel>();
+                }
+            }
+            KeyboardModel keyboard = list.FirstOrDefault(k => k.Brand == brand && k.Name == name && k.KeyboardType == type);
+
+            if (keyboard == null)
+            {
+                return false;
+            }
+
+            keyboard.Price = price;
+            string jsonWrite = JsonSerializer.Serialize(list);
+            File.WriteAllText(filepath, jsonWrite);
+
+            return true;
         }
 
         public List<KeyboardModel> GetKeyboardModels()

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.ViewModels;
 using KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Models;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Controllers
 {
