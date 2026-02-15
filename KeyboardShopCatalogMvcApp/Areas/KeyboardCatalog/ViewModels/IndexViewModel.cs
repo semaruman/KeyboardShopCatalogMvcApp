@@ -15,6 +15,9 @@ namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.ViewModels
              "Все", "Мембранная", "Механическая", "Ножничная"
         };
 
+        public string SelectedBrand { get; set; } = "Все";
+        public string SelectedType { get; set; } = "Все";
+
         public IndexViewModel()
         {
             KeyboardDb db = new KeyboardDb();

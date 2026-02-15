@@ -8,6 +8,22 @@
 
 <div>
 	<h2>Фильтры</h2>
+	<form asp-area="KeyboardCatalog" asp-controller="Home" asp-action="Index">
+		<h3>Бренд:</h3>
+		<select asp-for="SelectedBrand">
+			@foreach (var brand in Model.Brands)
+			{
+				<option>@brand</option>
+			}
+		</select>
+		<select asp-for="SelectedType">
+			@foreach (var type in Model.Types)
+			{
+				<option>@type</option>
+			}
+		</select>
+		<button type="submit">Применить</button>
+	</form>
 </div>
 <ul>
 	@foreach(var keyboard in Model.Keyboards)
