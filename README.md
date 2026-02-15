@@ -16,3 +16,11 @@ https://github.com/user-attachments/assets/c4a33ac9-de7b-46ed-8208-bed75f1975cf
 
 
 </div>
+
+<h2>Многофайловая система проекта:</h2>
+<div>
+  <img width="453" height="600" alt="image" src="https://github.com/user-attachments/assets/c2944bc9-af55-4db8-9b3f-378024a338ca" />
+  <br>
+  <img width="463" height="510" alt="image" src="https://github.com/user-attachments/assets/aab9ad47-3e54-428a-ab5b-29df0dfa77fb" />
+
+</div>
