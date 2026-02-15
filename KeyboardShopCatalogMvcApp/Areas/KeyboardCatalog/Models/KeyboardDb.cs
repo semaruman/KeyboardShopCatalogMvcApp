@@ -25,6 +25,24 @@ namespace KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Models
             File.WriteAllText(filepath, jsonWrite);
         }
 
+        public void RemoveKeyboardModel(string brand, string name, string type)
+        {
+            List<KeyboardModel> list = new List<KeyboardModel>();
+
+            if (File.Exists(filepath))
+            {
+                string json = File.ReadAllText(filepath);
+                if (!string.IsNullOrEmpty(json))
+                {
+                    list = JsonSerializer.Deserialize<List<KeyboardModel>>(json) ?? new List<KeyboardModel>();
+                }
+            }
+            list = list.Where(k => k.Brand != brand &&  k.Name != name && k.KeyboardType != type).ToList();
+
+            string jsonWrite = JsonSerializer.Serialize(list);
+            File.WriteAllText(filepath, jsonWrite);
+        }
+
         public List<KeyboardModel> GetKeyboardModels()
         {
             List<KeyboardModel> keyboards = new List<KeyboardModel>();

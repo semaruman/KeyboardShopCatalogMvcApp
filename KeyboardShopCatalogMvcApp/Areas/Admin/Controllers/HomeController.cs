@@ -2,6 +2,7 @@
 using KeyboardShopCatalogMvcApp.Areas.Admin.Models;
 using KeyboardShopCatalogMvcApp.Areas.Admin.ViewModels;
 using KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Models;
+using KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.ViewModels;
 
 namespace KeyboardShopCatalogMvcApp.Areas.Admin.Controllers
 {
@@ -88,7 +89,40 @@ namespace KeyboardShopCatalogMvcApp.Areas.Admin.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult RemoveKeyboard()
+        {
+            if (adminModel.IsAvtorizate)
+            {
+                return View(new KeyboardViewModel());
+            }
+            else
+            {
+                return RedirectToAction("ErrorAuthorization");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult RemoveKeyboard(KeyboardViewModel keyboard)
+        {
+            if (ModelState.IsValid)
+            {
+                KeyboardDb db = new KeyboardDb();
+                db.RemoveKeyboardModel(keyboard.Brand, keyboard.Name, keyboard.KeyboardType);
+                return RedirectToAction("RemoveKeyboardSuccess");
+            }
+            else
+            {
+                return View(keyboard);
+            }
+        }
+
         public IActionResult AddKeyboardSuccess()
+        {
+            return View();
+        }
+
+        public IActionResult RemoveKeyboardSuccess()
         {
             return View();
         }

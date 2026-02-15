@@ -1,0 +1,39 @@
+﻿@using KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.Models
+@using KeyboardShopCatalogMvcApp.Areas.KeyboardCatalog.ViewModels
+@model KeyboardViewModel
+
+@{
+	IndexViewModel indexViewModel = new IndexViewModel();
+}
+
+<h1>Удаление клавиатуры</h1>
+
+<form asp-area="Admin" asp-controller="Home" asp-action="RemoveKeyboard">
+	<h2>Выберите бренд клавиатуры</h2>
+	<select asp-for="Brand">
+		@foreach (var brand in indexViewModel.Brands.Skip(1))
+		{
+			<option value=@brand>@brand</option>
+		}
+	</select>
+	<span asp-validation-for="Brand"></span>
+
+	<h2>Введите название клавиатуры</h2>
+	<input asp-for="Name" />
+	<span asp-validation-for="Name"></span>
+
+	<h2>Выберите тип клавиатуры</h2>
+	<select asp-for="KeyboardType">
+		@foreach (var type in indexViewModel.Types.Skip(1))
+		{
+			<option value=@type>@type</option>
+		}
+	</select>
+	<span asp-validation-for="KeyboardType"></span>
+
+	<input type="hidden" asp-for="Price" value="1"/>
+
+	<div>
+		<button type="submit">Отправить</button>
+	</div>
+</form>
