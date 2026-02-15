@@ -5,3 +5,16 @@
 }
 
 <h1>Найдено @itemsCount товаров в категории Клавиатура</h1>
+
+<div>
+	<h2>Фильтры</h2>
+</div>
+<ul>
+	@foreach(var keyboard in Model.Keyboards)
+	{
+		<li>
+			<h4>Клавиатура @keyboard.KeyboardType @keyboard.Brand @keyboard.Name</h4>
+			<h3>@keyboard.Price Р</h3>
+		</li>
+	}
+</ul>
